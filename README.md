@@ -1,3 +1,3 @@
--- Made UART Module Transmitter
--- Made UART Transmitter TOP
--- Tested it! Works. 1 bit Parity Even, 8 bit Data, Standard 115200 Baud.
+-- Made UART Module Transmitter \n;
+-- Made UART Transmitter TOP \n;
+-- Tested it! Works. 1 bit Parity Even, 8 bit Data, Standard 115200 Baud. \n;
