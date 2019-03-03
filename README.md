@@ -5,12 +5,12 @@
 ---------------------------------
 | Specs         |               |
 | ------------- |:-------------:|
-| Data          | 8bits         |
+| Data          | 8 bit         |
 | Baudrate      | 115200        |
-| Parity        | Even          |
+| Parity        | Even bit      |
 | Board         | Basys 3       |
 | CLK           | 100 MHz       |
-| Stop          | 1             |
+| Stop          | 1 bit         |
 ---------------------------------
 
 [guide](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
