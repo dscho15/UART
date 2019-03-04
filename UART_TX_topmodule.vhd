@@ -81,7 +81,6 @@ begin
     process(clk) begin
         if (rising_edge(clk)) then
             case( state ) is
-
                 when TX_RDY =>
                     if (send = active) then
                         state <= TX_SEND_CHAR;

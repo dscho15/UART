@@ -84,6 +84,7 @@ architecture Behavioral of UART_TX is
             when PARITY_BIT =>
                     if (state_parity = INIT) then
                         parity <= data(7) xor data(6) xor data(5) xor data(4) xor data(3) xor data(2) xor data(1) xor data(0);
+                        -- use VHDL 2008 instead
                         state_parity <= FINISH_PAR;
                     elsif (state_parity = FINISH_PAR) then
                         txData <= stop_bit & parity & data & start_bit;
