@@ -1,3 +1,18 @@
+@font-face {
+    font-family: 'gooddogregular';
+    src: url('gooddog-webfont.eot');
+    src: url('gooddog-webfont.eot?#iefix') format('embedded-opentype'),
+         url('gooddog-webfont.woff') format('woff'),
+         url('gooddog-webfont.ttf') format('truetype'),
+         url('gooddog-webfont.svg#gooddogregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
 # UART MODULE - ROBTEK 4 SEM
 ---------------------------------
 1. Made UART Module Transmitter
