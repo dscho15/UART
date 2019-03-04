@@ -24,17 +24,17 @@ use IEEE.std_logic_arith.ALL;
 
 entity UART_RS is
 generic(
-    baud        :   integer := 9600;                    -- baud rate
-    clk_board   :   integer := 100000000                -- clk board
+    baud                    :   integer := 9600;                                -- baud rate
+    clk_board               :   integer := 100000000                            -- clk board
     );
     -- checking if parity
 port(
-    clk         :   in std_logic;
-    uart_rs     :   in  std_logic;
-    data        :   out std_logic_vector (7 downto 0);  -- data to be send
-    ready       :   out std_logic;                      -- is ready to sent if high send
-    parity_fail :   out std_logic := '0';
-    sync_fail   :   out std_logic := '0'
+    clk                     :   in std_logic;
+    uart_rs                 :   in  std_logic;
+    data                    :   out std_logic_vector (7 downto 0);              -- data to be send
+    ready                   :   out std_logic;                                  -- is ready to sent if high send
+    parity_fail             :   out std_logic := '0';
+    sync_fail               :   out std_logic := '0'
     );
 end UART_RS;
 
@@ -44,7 +44,6 @@ architecture Behavioral of UART_RS is
     ----------------------------CONSTANTS---------------------------------------
     constant baud_ref       :   integer := clk_board/baud;
     constant bit_max_ref    :   integer := 11;
-    constant data_size      :   integer := 8;
     constant RESET_INT      :   integer := 0;
     constant LOW            :   std_logic := '0';
     constant HIGH           :   std_logic := '1';
