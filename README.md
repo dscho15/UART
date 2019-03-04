@@ -7,7 +7,7 @@
 ---------------------------------
 | Specs         |               |
 | ------------- |:-------------:|
-| Data          | 8 bit         |
+| Databit       | 8 bit         |
 | Baudrate      | 115200        |
 | Parity        | Even bit      |
 | Board         | Basys 3       |
@@ -18,7 +18,7 @@
 ---------------------------------
 | Specs         |               |
 | ------------- |:-------------:|
-| Data          | 8 bit         |
+| Databit       | 8 bit         |
 | Baudrate      | 115200        |
 | Parity        | Even bit      |
 | Board         | Basys 3       |
