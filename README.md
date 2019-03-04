@@ -3,6 +3,19 @@
 1. Made UART Module Transmitter
 2. Made UART Transmitter TOP
 ---------------------------------
+# TSTX MODULE SPECS
+---------------------------------
+| Specs         |               |
+| ------------- |:-------------:|
+| Data          | 8 bit         |
+| Baudrate      | 115200        |
+| Parity        | Even bit      |
+| Board         | Basys 3       |
+| CLK           | 100 MHz       |
+| Stop          | 1 bit         |
+---------------------------------
+# RSRX MODULE SPECS
+---------------------------------
 | Specs         |               |
 | ------------- |:-------------:|
 | Data          | 8 bit         |
