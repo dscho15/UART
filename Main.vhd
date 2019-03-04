@@ -101,23 +101,19 @@ begin
 UUT2: UART_TX_topmodule
     port map(send => send_buf, r_w => sw(7), clk => clk, data => sw(6 downto 0), ready => led(0), RsTx => RsTx);
     
-UUT4: UART_RS
+UUT3: UART_RS_topmodule
+    port map(clk => clk, RsRx => RsRx, read_d => b_read, data => b_data, ready => b_ready);
     
---UUT3: UART_RS_topmodule
---    port map(clk => clk, RsRx => RsRx, read_d => b_read, data => b_data, ready => b_ready);
-    
---    process(clk) begin
---        if(rising_edge(clk)) then
---            if(b_ready = '1') then
---                more_buf(7 downto 0) <= b_data;
---                b_read <= '1';
---            else
---                more_buf(15 downto 8) <= more_buf(7 downto 0);
---                b_read <= '0';
---            end if;
---        end if;
---    end process;
-    
-    led(15 downto 8) <= more_buf(15 downto 8);
+    process(clk) begin
+        if(rising_edge(clk)) then
+            if(b_ready = '1') then
+                more_buf(7 downto 0) <= b_data;
+                b_read <= '1';
+            else
+                more_buf(15 downto 8) <= more_buf(7 downto 0);
+                b_read <= '0';
+            end if;
+        end if;
+    end process;
     
 end Behavioral;
