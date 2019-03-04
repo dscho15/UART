@@ -33,7 +33,7 @@ port(
     clk         :   in  std_logic;  -- clk output as input
     data        :   in  std_logic_vector (7 downto 0); -- data to be send
     ready       :   out std_logic; -- is ready to sent if high send
-    uart_tx     :   out std_logic -- IO Tx
+    RsTx        :   out std_logic -- IO Tx
     );
 end UART_TX;
 
@@ -42,24 +42,19 @@ architecture Behavioral of UART_TX is
 
     ----------------------------CONSTANTS---------------------------------------
     constant baud_ref       :   integer := clk_board/baud;
-    constant bit_max_ref    :   integer := 11;
-    constant data_size      :   integer := 8;
+    constant bit_max_ref    :   integer := 10;
     ----------------------------CODE SIMPLIFYERS--------------------------------
     constant stop_bit       :   std_logic := '1';
     constant start_bit      :   std_logic := '0';
     constant inactive       :   std_logic := '1';
     ----------------------------TYPE--------------------------------------------
-    type    state_type is (RDY, PARITY_BIT, LOAD_BIT, SEND_BIT);
-    type    parity_type is (INIT, FINISH_PAR);
+    type    state_type is (RDY, LOAD_BIT, SEND_BIT);
     ----------------------------SIGNALS-----------------------------------------
     signal state_uart       :   state_type := RDY;
     signal timer_uart       :   integer := 0;
     signal txData           :   std_logic_vector ((bit_max_ref-1) downto 0);
     signal txBit            :   std_logic := '1';
-    signal current_bitIndex :   integer range 0 TO bit_max_ref := 0;
-
-    signal state_parity     :   parity_type := INIT;
-    signal parity           :   std_logic := '0';
+    signal bitIndex         :   integer range 0 TO bit_max_ref := 0;
     ----------------------------START-------------------------------------------
 
     begin
@@ -72,36 +67,25 @@ architecture Behavioral of UART_TX is
     if (rising_edge(clk)) then
         case state_uart is
     ----------------------------------------------------------------------------
-            when RDY =>                         -- waiting to send data
+            when RDY =>                                                 -- waiting to send data
                     if (send = '1') then
-                        state_uart <= PARITY_BIT;      -- change to next state
+                        state_uart <= LOAD_BIT;                         -- change to next state
+                        txData <= stop_bit & data & start_bit;
                     end if;
-                    timer_uart <= 0;             -- this is the clk
-                    current_bitIndex <= 0;  -- current bit index;
-                    txBit <= inactive;          -- keep line high
-                    state_parity <= INIT; -- reset parity state
-    ----------------------------------------------------------------------------
-            when PARITY_BIT =>
-                    if (state_parity = INIT) then
-                        parity <= data(7) xor data(6) xor data(5) xor data(4) xor data(3) xor data(2) xor data(1) xor data(0);
-                        -- use VHDL 2008 instead
-                        state_parity <= FINISH_PAR;
-                    elsif (state_parity = FINISH_PAR) then
-                        txData <= stop_bit & parity & data & start_bit;
-                        state_parity <= INIT;
-                        state_uart <= LOAD_BIT;
-                    end if;
+                    timer_uart <= 0;                                    -- this is the clk
+                    bitIndex <= 0;                                      -- current bit index;
+                    txBit <= inactive;                                  -- keep line high
     ----------------------------------------------------------------------------
             when LOAD_BIT =>
                     state_uart <= SEND_BIT;
-                    txBit <= txData(current_bitIndex);   --this is what we sent
-                    current_bitIndex <= current_bitIndex + 1;
+                    txBit <= txData(bitIndex);                          --this is what we sent
+                    bitIndex <= bitIndex + 1;
     ----------------------------------------------------------------------------
             when SEND_BIT =>
                     if (timer_uart = baud_ref) then
-                    timer_uart <= 0;    --reset when equal to baud_ref
-                        if (current_bitIndex = bit_max_ref) then
-                            state_uart <= RDY;   -- stop when all sent
+                    timer_uart <= 0;                                    --reset when equal to baud_ref
+                        if (bitIndex = bit_max_ref) then
+                            state_uart <= RDY;                          -- stop when all sent
                         else
                             state_uart <= LOAD_BIT;
                         end if;
@@ -115,7 +99,7 @@ architecture Behavioral of UART_TX is
         end if;
     end process;
     ----------------------------------------------------------------------------
-    uart_tx <= txBit;
+    RsTx <= txBit;
     ready <= '1' when (state_uart = RDY) else '0';
     ----------------------------------------------------------------------------
 end Behavioral;

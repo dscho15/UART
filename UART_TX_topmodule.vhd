@@ -26,12 +26,12 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity UART_TX_topmodule is
     port(
-        send        :   in  std_logic;
-        r_w         :   in  std_logic;  -- conc with data to make 8bit
-        clk         :   in  std_logic;
-        data        :   in  std_logic_vector (6 downto 0);
-        ready       :   out std_logic;
-        RsTx        :   out std_logic
+        send              :   in  std_logic;
+        r_w               :   in  std_logic;  -- conc with data to make 8bit
+        clk               :   in  std_logic;
+        data              :   in  std_logic_vector (6 downto 0);
+        ready             :   out std_logic;
+        RsTx              :   out std_logic
         );
 end UART_TX_topmodule;
 
@@ -42,15 +42,15 @@ architecture Behavioral of UART_TX_topmodule is
     ----------------------------------------------------------------------------
     component UART_TX is
     generic(
-        baud        :   integer := 9600;        -- baud rate
-        clk_board   :   integer := 100000000   -- clk board
+        baud              :   integer := 9600;        -- baud rate
+        clk_board         :   integer := 100000000   -- clk board
         );
     port(
-        send        :   in  std_logic;
-        clk         :   in  std_logic;
-        data        :   in  std_logic_vector (7 downto 0);
-        ready       :   out std_logic;
-        uart_tx     :   out std_logic
+        send              :   in  std_logic;
+        clk               :   in  std_logic;
+        data              :   in  std_logic_vector (7 downto 0);
+        ready             :   out std_logic;
+        RsTx              :   out std_logic
         );
     end component;
     ----------------------------STATE-------------------------------------------
@@ -61,15 +61,15 @@ architecture Behavioral of UART_TX_topmodule is
     constant deactivate   :   std_logic := '0';
     constant max_delay    :   integer   := 3;
     ----------------------------SIGNALS-----------------------------------------
-    signal state        :   state_type;
-    signal uart_rdy     :   std_logic;
-    signal uart_send    :   std_logic;
-    signal uart_data    :   std_logic_vector (7 downto 0);
-    signal send_tx      :   std_logic := '0';
+    signal state          :   state_type;
+    signal uart_rdy       :   std_logic;
+    signal uart_send      :   std_logic;
+    signal uart_data      :   std_logic_vector (7 downto 0);
+    signal send_tx        :   std_logic := '0';
 
-    signal counter_dela :   integer range 0 to max_delay := 0;
+    signal counter_dela   :   integer range 0 to max_delay := 0;
 
-    signal b_ready      :   std_logic; -- buffer output ready
+    signal b_ready        :   std_logic; -- buffer output ready
     ----------------------------BEGIN-------------------------------------------
 
 begin
@@ -107,7 +107,7 @@ begin
 
 TX: UART_TX
     generic map(baud => 115200, clk_board => 100000000)
-    port map(send => send_tx, clk => clk, data => uart_data, ready => b_ready, uart_tx => RsTx);
+    port map(send => send_tx, clk => clk, data => uart_data, ready => b_ready, RsTx => RsTx);
 
 
 end Behavioral;
