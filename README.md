@@ -8,10 +8,10 @@
 | Specs         |               |
 | ------------- |:-------------:|
 | Databit       | 8 bit         |
-| Baudrate      | 115200        |
+| Baudrate      | Generic       |
 | Parity        | Even bit      |
 | Board         | Basys 3       |
-| CLK           | 100 MHz       |
+| CLK           | Generic       |
 | Stop          | 1 bit         |
 ---------------------------------
 # RSRX MODULE SPECS
@@ -19,10 +19,10 @@
 | Specs         |               |
 | ------------- |:-------------:|
 | Databit       | 8 bit         |
-| Baudrate      | 115200        |
+| Baudrate      | Generic       |
 | Parity        | Even bit      |
 | Board         | Basys 3       |
-| CLK           | 100 MHz       |
+| CLK           | Generic       |
 | Stop          | 1 bit         |
 ---------------------------------
 
