@@ -105,7 +105,6 @@ process(sck)
 begin
     if (falling_edge(sck)) then
         case( state ) is
-
             when RDY_SPI =>
                 if (ss = '0') then
                     data_temp(index) <= mosi;
