@@ -84,7 +84,7 @@ begin
 				
 					if (curState = add) then
 					
-					    --hvis værdien er nået max: 127 sættes den tilbage til 0
+					    --hvis værdien er nået max: 128 sættes den tilbage til 0
 					    if (EncOut = "01111111") then
 					                                    
 					            EncOut <= "00000000" ;
@@ -109,7 +109,7 @@ begin
                         
                                 EncOut <= "11111111";
                         
-                        --Hvis Værdien var nået min: -127 sættes den tilbae til 0
+                        --Hvis Værdien var nået min: -128 sættes den tilbae til 0
                         elsif (EncOut = "10000000") then
                          
                                 EncOut <= "00000000";
